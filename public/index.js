@@ -154,23 +154,24 @@ function calculatePrice(time,persons,pricePerHour,pricePerPerson) {
 
 
 //STEP 2 - Send more, pay less
-function decreasePrice(persons, price){
+function decreasePricePerPerson(persons, pricePerPerson){
   if(persons>10 && persons<=20)
   {
-    price = price - price*0.1;
+    pricePerPerson = pricePerPerson - pricePerPerson*0.1;
   }
   if(persons>20 && persons<=60)
   {
-    price = price - price*0.3;
+    pricePerPerson = pricePerPerson - pricePerPerson*0.3;
   }
   if(persons>60)
   {
-    price = price - price*0.5;
+    pricePerPerson = pricePerPerson - pricePerPerson*0.5;
   }
-  return price;
+  return pricePerPerson;
 }
 
 
+//Change price in the list of events (for STEP 1 & 2)
 function changePrice(events,bars) {
   for(var i = 0; i < events.length; i++)
   {
@@ -189,10 +190,11 @@ function changePrice(events,bars) {
     var pricePerHour = bar.pricePerHour;
     var pricePerPerson = bar.pricePerPerson;
     //Finally, we change the price of the event with the correct formula
+    pricePerPerson = decreasePricePerPerson(persons,pricePerPerson);
     events[i].price = calculatePrice(time,persons,pricePerHour,pricePerPerson);
-    events[i].price = decreasePrice(persons,events[i].price);
   }
 }
+
 
 changePrice(events,bars);
 
