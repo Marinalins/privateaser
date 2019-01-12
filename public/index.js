@@ -155,15 +155,15 @@ function calculatePrice(time,persons,pricePerHour,pricePerPerson) {
 
 //STEP 2 - Send more, pay less
 function decreasePrice(persons, price){
-  if(persons>=10 && persons<20)
+  if(persons>10 && persons<=20)
   {
     price = price - price*0.1;
   }
-  if(persons>=20 && persons<60)
+  if(persons>20 && persons<=60)
   {
     price = price - price*0.3;
   }
-  if(persons>=60)
+  if(persons>60)
   {
     price = price - price*0.5;
   }
