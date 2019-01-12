@@ -147,7 +147,11 @@ const actors = [{
 }];
 
 //functions
-function calculatePrice(events,bars) {
+function calculatePrice(time,persons,pricePerHour,pricePerPerson) {
+    return time * pricePerHour + persons * pricePerPerson;
+}
+
+function changePrice(events,bars) {
   for(var i = 0; i < events.length; i++)
   {
     //First, we search the bar corresponding to the event
@@ -165,11 +169,11 @@ function calculatePrice(events,bars) {
     var pricePerHour = bar.pricePerHour;
     var pricePerPerson = bar.pricePerPerson;
     //Finally, we change the price of the event with the correct formula
-    events[i].price = time * pricePerHour + persons * pricePerPerson;
+    events[i].price = calculatePrice(time,persons,pricePerHour,pricePerPerson);
   }
 }
 
-calculatePrice(events,bars);
+changePrice(events,bars);
 
 console.log(bars);
 console.log(events);
