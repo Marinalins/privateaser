@@ -216,7 +216,35 @@ function changePriceDeductible(events){
     if(events[i].options.deductibleReduction)
     {
       events[i].price += events[i].persons
+      events[i].commission.privateaser += events[i].persons
     }
+  }
+}
+
+
+//STEP 5 - Pay the actors
+function changePayment(actors,events){
+  for(var i = 0; i < actors.length; i++)
+  {
+    //We search for the corresponding event
+    var event;
+    for(var j = 0; j < events.length; j++)
+    {
+      if(actors[i].eventId == events[j].id)
+      {
+        event = events[j];
+      }
+    }
+    var booker = event.price;
+    var bar = event.price - (event.commission.insurance + event.commission.treasury + event.commission.privateaser);
+    var insurance = event.commission.insurance;
+    var treasury = event.commission.treasury;
+    var privateaser = event.commission.privateaser;
+    actors[i].payment[0].amount = booker;
+    actors[i].payment[1].amount = bar;
+    actors[i].payment[2].amount = insurance;
+    actors[i].payment[3].amount = treasury;
+    actors[i].payment[4].amount = privateaser;
   }
 }
 
@@ -224,6 +252,7 @@ function changePriceDeductible(events){
 changePrice(events,bars);
 changeCommission(events);
 changePriceDeductible(events);
+changePayment(actors,events);
 
 console.log(bars);
 console.log(events);
