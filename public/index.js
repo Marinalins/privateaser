@@ -216,12 +216,16 @@ function changePriceDeductible(events){
     if(events[i].options.deductibleReduction)
     {
       events[i].price += events[i].persons
+<<<<<<< HEAD
       events[i].commission.privateaser += events[i].persons
+=======
+>>>>>>> c02a042860a9aadf95fb60c078678996e29958ab
     }
   }
 }
 
 
+<<<<<<< HEAD
 //STEP 5 - Pay the actors
 function changePayment(actors,events){
   for(var i = 0; i < actors.length; i++)
@@ -253,6 +257,11 @@ changePrice(events,bars);
 changeCommission(events);
 changePriceDeductible(events);
 changePayment(actors,events);
+=======
+changePrice(events,bars);
+changeCommission(events);
+changePriceDeductible(events);
+>>>>>>> c02a042860a9aadf95fb60c078678996e29958ab
 
 console.log(bars);
 console.log(events);
