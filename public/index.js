@@ -196,7 +196,34 @@ function changePrice(events,bars) {
 }
 
 
+//STEP 3 - Give me all your money
+function changeCommission(events){
+  for(var i = 0; i < events.length; i++)
+  {
+    var commission = events[i].price * 0.3;
+    var insurance = commission / 2;
+    var treasury = events[i].persons;
+    var privateaser = commission - insurance - treasury;
+    events[i].commission = {insurance,treasury,privateaser};
+  }
+}
+
+
+//STEP 4 - The famous deductible
+function changePriceDeductible(events){
+  for(var i = 0; i < events.length; i++)
+  {
+    if(events[i].options.deductibleReduction)
+    {
+      events[i].price += events[i].persons
+    }
+  }
+}
+
+
 changePrice(events,bars);
+changeCommission(events);
+changePriceDeductible(events);
 
 console.log(bars);
 console.log(events);
